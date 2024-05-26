@@ -2,7 +2,7 @@ resource "proxmox_virtual_environment_vm" "vm_k8s_worker_01" {
   name      = "k8s-worker-01"
   node_name = "pve02"
   on_boot   = false
-  provider = proxmox.pve_cluster
+  provider  = proxmox.pve_cluster
 
   agent {
     enabled = true

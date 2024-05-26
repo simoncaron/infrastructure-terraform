@@ -3,7 +3,7 @@ resource "proxmox_virtual_environment_file" "cloud_config_vendor" {
   content_type = "snippets"
   datastore_id = "local"
   node_name    = var.pve_nodes[count.index]
-  provider = proxmox.pve_cluster
+  provider     = proxmox.pve_cluster
 
   source_raw {
     data = <<EOF
