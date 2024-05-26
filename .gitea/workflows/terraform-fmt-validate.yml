@@ -8,9 +8,6 @@ name: Terraform fmt/validate
 
 jobs:
   terraform:
-    defaults:
-      run:
-        working-directory: terraform
     name: Terraform fmt/validate
     runs-on: ubuntu-latest
     steps:
