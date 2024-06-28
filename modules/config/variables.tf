@@ -1,4 +1,4 @@
 variable "pve_nodes" {
   type    = list(string)
-  default = ["pve02", "pve03"]
+  default = ["pve01", "pve02"]
 }

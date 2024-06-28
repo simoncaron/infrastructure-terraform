@@ -1,5 +1,5 @@
 provider "proxmox" {
-  endpoint = "https://pve02.simn.io:8006/"
+  endpoint = "https://pve01.simn.io:8006/"
   username = data.bitwarden_item_login.proxmox_user.password
   password = data.bitwarden_item_login.proxmox_password.password
   alias    = "cluster01"

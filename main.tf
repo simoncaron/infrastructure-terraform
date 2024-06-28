@@ -5,10 +5,6 @@ module "infrastructure_config" {
   }
 }
 
-module "infrastructure_lxc" {
-  source = "./modules/lxc"
-}
-
 module "infrastructure_vm" {
   source                 = "./modules/vm"
   default_ssh_public_key = data.bitwarden_item_login.default_ssh_public_key.password
@@ -16,6 +12,10 @@ module "infrastructure_vm" {
   providers = {
     proxmox.pve_cluster = proxmox.cluster01
   }
+}
+
+/* module "infrastructure_lxc" {
+  source = "./modules/lxc"
 }
 
 module "infrastructure_dns" {
@@ -29,3 +29,4 @@ module "infrastructure_oci" {
 module "infrastructure_tailscale" {
   source = "./modules/tailscale"
 }
+ */

@@ -1,6 +1,6 @@
 resource "proxmox_virtual_environment_vm" "vm_k8s_worker_03" {
   name      = "k8s-worker-03"
-  node_name = "pve03"
+  node_name = "pve02"
   on_boot   = false
   provider  = proxmox.pve_cluster
 
@@ -18,8 +18,8 @@ resource "proxmox_virtual_environment_vm" "vm_k8s_worker_03" {
   }
 
   disk {
-    datastore_id = "local-lvm"
-    file_id      = "local:iso/jammy-server-cloudimg-amd64.img"
+    datastore_id = "local-zfs"
+    file_id      = "local:iso/debian-12-generic-amd64.qcow2.img"
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
@@ -27,25 +27,24 @@ resource "proxmox_virtual_environment_vm" "vm_k8s_worker_03" {
   }
 
   initialization {
-    datastore_id = "local-lvm"
+    datastore_id = "local-zfs"
     ip_config {
       ipv4 {
-        address = "10.0.2.15/24"
-        gateway = "10.0.2.1"
+        address = "192.168.2.215/24"
+        gateway = "192.168.2.1"
       }
     }
 
     user_account {
       keys     = [var.default_ssh_public_key]
-      username = "ubuntu"
+      username = "debian"
     }
 
     vendor_data_file_id = "local:snippets/cloud-config-vendor.yaml"
   }
 
   network_device {
-    bridge = "vnet1"
-    mtu    = "1450"
+    bridge = "vmbr0"
   }
 
   operating_system {
