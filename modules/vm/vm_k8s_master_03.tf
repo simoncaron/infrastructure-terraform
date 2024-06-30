@@ -18,7 +18,7 @@ resource "proxmox_virtual_environment_vm" "vm_k8s_master_03" {
   }
 
   disk {
-    datastore_id = "local-zfs"
+    datastore_id = "local-lvm"
     file_id      = "local:iso/debian-12-generic-amd64.qcow2.img"
     interface    = "virtio0"
     iothread     = true
@@ -26,13 +26,19 @@ resource "proxmox_virtual_environment_vm" "vm_k8s_master_03" {
     size         = 32
   }
 
+  scsi_hardware = "virtio-scsi-single"
+
   initialization {
-    datastore_id = "local-zfs"
+    datastore_id = "local-lvm"
     ip_config {
       ipv4 {
         address = "192.168.2.213/24"
         gateway = "192.168.2.1"
       }
+    }
+
+    dns {
+      domain = "local"
     }
 
     user_account {
